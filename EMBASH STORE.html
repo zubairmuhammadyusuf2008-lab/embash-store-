@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EMBASH STORE</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0a;--surface:#141414;--line:#2f2f2f;--text:#f5f1e8;--muted:#a39e91;--gold:#c9a24b;--ink:#0a0a0a;--err:#ff8a7a;--ok:#8fd19e;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#faf8f3;--surface:#fff;--line:#d9d2bf;--text:#111;--muted:#6b665a;--gold:#a67c1f;--ink:#fff;--err:#b3261e;--ok:#1b6b34;color-scheme:light}}
+:root[data-theme="light"]{--bg:#faf8f3;--surface:#fff;--line:#d9d2bf;--text:#111;--muted:#6b665a;--gold:#a67c1f;--ink:#fff;--err:#b3261e;--ok:#1b6b34;color-scheme:light}
+*{box-sizing:border-box;margin:0}
+html{scroll-padding-top:70px;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:400 16px/1.55 Jost,system-ui,sans-serif}
+h1,h2,h3,.brand{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700}
+a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.topbar{background:#0a0a0a;color:#f5f1e8;border-bottom:1px solid #2a2a2a;display:flex;justify-content:space-between;gap:12px;padding:7px 20px;font-size:14px;flex-wrap:wrap}.topbar a{color:#e6c778}
+header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:10px 20px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-size:25px;letter-spacing:.04em;white-space:nowrap}.brand b{color:var(--gold)}.brand i{font:500 12px Jost,sans-serif;letter-spacing:.3em;color:var(--muted);font-style:normal;margin-left:2px}
+.lg svg{width:34px;display:block}
+nav{display:flex;gap:18px;margin-left:8px}nav a{color:var(--muted)}nav a:hover{color:var(--gold)}
+.sp{flex:1}
+input,select,textarea{width:100%;background:var(--surface);border:1px solid var(--line);color:var(--text);padding:11px;font:inherit;border-radius:2px}
+input[aria-invalid=true]{border-color:var(--err)}
+#q{width:190px;border-radius:99px;padding:8px 14px}
+.cartbtn{background:var(--gold);color:var(--ink);border:0;padding:8px 16px;border-radius:99px;font-weight:500}
+.loginbtn{border:1px solid var(--gold);color:var(--gold);padding:7px 18px;border-radius:99px;font-weight:500}.loginbtn:hover{background:var(--gold);color:var(--ink)}
+.btn{display:inline-block;border:1px solid var(--gold);color:var(--gold);padding:10px 22px;background:none;border-radius:2px}
+.btn.fill,.go{background:var(--gold);color:var(--ink)}
+.go{width:100%;border:0;padding:13px;margin-top:18px;font-weight:500}
+.btn.o{border-color:var(--line);color:var(--text);padding:5px 12px;font-size:14px}.btn.w{color:var(--err);border-color:var(--err)}
+.link{background:none;border:0;color:var(--gold);text-decoration:underline;padding:0}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:30px;align-items:center;padding:56px 20px;max-width:1200px;margin:auto}
+.hero h1{font-size:clamp(44px,8vw,92px);line-height:.95}.hero h1 b{color:var(--gold)}
+.hero p{color:var(--muted);margin:18px 0 26px;max-width:46ch}
+.mark{justify-self:center;width:min(100%,320px)}.mark svg{width:100%}
+section,.pg{max-width:1200px;margin:auto;padding:46px 20px}
+h2{font-size:36px;margin-bottom:6px}.sub{color:var(--muted);margin-bottom:20px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.chip{background:none;border:1px solid var(--line);color:var(--text);padding:7px 16px;border-radius:99px}.chip[aria-pressed=true]{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column}
+.pic{aspect-ratio:4/5;display:grid;place-items:center;position:relative;overflow:hidden}.pic svg{width:56%;fill:currentColor}.pic img{width:100%;height:100%;object-fit:cover}
+.tag{position:absolute;top:10px;left:10px;background:var(--gold);color:var(--ink);font-size:12px;padding:2px 9px}
+.info{padding:14px;display:flex;flex-direction:column;gap:7px;flex:1}.info h3{font-size:21px}
+.price{color:var(--gold)}.price s{color:var(--muted);margin-left:6px;font-size:14px}
+.spec{font-size:13px;color:var(--muted)}.spec select{width:auto;padding:3px 6px}
+.add{margin-top:auto;background:var(--text);color:var(--bg);border:0;padding:10px}.add:hover{background:var(--gold);color:var(--ink)}.add:disabled{opacity:.4;cursor:not-allowed}
+.empty{color:var(--muted);padding:24px 0}
+footer{border-top:1px solid var(--line);padding:36px 20px;color:var(--muted);text-align:center}footer .brand{justify-content:center;color:var(--text);margin-bottom:6px}
+.box{max-width:410px;margin:auto}
+.tabs{display:flex;border-bottom:1px solid var(--line);margin-bottom:22px}.tabs button{flex:1;background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);padding:12px}.tabs [aria-selected=true]{color:var(--gold);border-color:var(--gold)}
+label{display:block;font-size:14px;color:var(--muted);margin:13px 0 5px}
+.err{color:var(--err);font-size:13px;min-height:16px;margin-top:3px}.msg{font-size:14px;margin-top:12px;min-height:20px;color:var(--err)}.msg.ok{color:var(--ok)}
+.pw{position:relative}.pw button{position:absolute;right:6px;top:6px;background:none;border:0;color:var(--muted);padding:6px 8px;font-size:14px}
+.note{font-size:12px;color:var(--muted);margin-top:14px;border:1px dashed var(--line);padding:10px}
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}.stat{background:var(--surface);border:1px solid var(--line);padding:10px 18px;min-width:130px}.stat b{display:block;font-size:24px;color:var(--gold)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.wrap{overflow-x:auto;border:1px solid var(--line)}table{border-collapse:collapse;width:100%;min-width:640px}th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:middle}th{color:var(--muted);font-weight:400;font-size:14px}td small{color:var(--muted)}.low{color:var(--err)}
+.th{width:44px;height:52px;background:var(--line);object-fit:cover;display:block}
+#pf{background:var(--surface);border:1px solid var(--line);padding:20px;margin:16px 0;display:grid;grid-template-columns:1fr 1fr;gap:0 16px}#pf h3{grid-column:1/-1;font-size:24px}.full{grid-column:1/-1}.acts{grid-column:1/-1;display:flex;gap:10px;margin-top:16px}
+#drawer{position:fixed;inset:0 0 0 auto;width:min(420px,100%);background:var(--surface);border-left:1px solid var(--line);z-index:40;transform:translateX(100%);transition:transform .25s;display:flex;flex-direction:column;padding:calc(20px + env(safe-area-inset-top,0px)) 20px calc(20px + env(safe-area-inset-bottom,0px))}#drawer.open{transform:none}
+#items{flex:1;overflow:auto;margin:14px 0}.row{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}.row small{color:var(--muted);display:block}
+.qty button{width:26px;background:none;border:1px solid var(--line);color:var(--text)}
+.tot{display:flex;justify-content:space-between;color:var(--muted)}.tot.big{color:var(--text);font-size:19px;margin:6px 0 14px}
+#drawer .btn{width:100%;text-align:center}
+.cgrid{display:grid;grid-template-columns:1fr 2fr 2fr auto;gap:8px;margin-top:10px;align-items:center}
+@media (max-width:760px){.hero{grid-template-columns:1fr;padding-top:30px}.mark{order:-1;width:170px}nav{order:9;width:100%;justify-content:space-around;margin:0}#q{width:130px}#pf{grid-template-columns:1fr}.cgrid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="topbar"><a id="tw" href="https://wa.me/2349161036886" target="_blank" rel="noopener">WhatsApp: 0916 103 6886</a><span>Ready to serve you well</span></div>
+<header>
+  <a class="brand" href="#store" aria-label="EMBASH STORE home"><span class="lg" data-logo></span><span>EM<b>BASH</b> <i>STORE</i></span></a>
+  <nav><a href="#shop">Shop</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+  <span class="sp"></span>
+  <input id="q" type="search" placeholder="Search clothes" aria-label="Search clothes">
+  <button class="cartbtn" id="open">Cart (<span id="count">0</span>)</button>
+  <a class="loginbtn" id="auth" href="#login">Log in</a>
+</header>
+
+<main>
+<div data-v="store">
+  <div class="hero">
+    <div><h1>We are<br>the <b>best.</b></h1><p>Clothing made with care for people who want to look sharp every day. Ready to serve you well.</p><a class="btn fill" href="#shop">Shop the collection</a></div>
+    <div class="mark" data-logo></div>
+  </div>
+  <section id="shop"><h2>Shop</h2><p class="sub">Read the details, pick a colour if there is a choice, then add to cart.</p><div class="chips" id="chips"></div><p class="spec" id="sr" role="status" style="margin-bottom:14px"></p><div class="grid" id="grid"></div><p class="empty" id="none" hidden>No clothes match your search. Try another word or category.</p></section>
+  <section id="about"><h2>About EMBASH STORE</h2><p class="sub" style="max-width:60ch">We are a clothing brand built on one promise: ready to serve you well. Every piece is chosen for fit, fabric and finish. Orders are placed on WhatsApp, where we confirm availability and delivery with you.</p></section>
+</div>
+
+<div data-v="login" class="pg" hidden><div class="box">
+  <div class="tabs" role="tablist"><button id="t1" role="tab" aria-selected="true">Log in</button><button id="t2" role="tab" aria-selected="false">Sign up</button></div>
+  <form id="lf" novalidate><h2>Welcome back</h2><p class="sub">Customers and store admins log in here. You are taken to the right place automatically.</p>
+    <label for="le">Email</label><input id="le" type="email" autocomplete="username"><div class="err" data-for="le"></div>
+    <label for="lp">Password</label><div class="pw"><input id="lp" type="password" autocomplete="current-password"><button type="button" data-show="lp">Show</button></div><div class="err" data-for="lp"></div>
+    <div style="text-align:right;margin-top:10px"><button type="button" class="link" id="fgo">Forgot password?</button></div>
+    <button class="go">Log in</button><div class="msg" id="lm" role="status"></div></form>
+  <form id="sf" novalidate hidden><h2>Create your account</h2><p class="sub">Create an account to track orders and save your favourites.</p>
+    <label for="sn">Full name</label><input id="sn" autocomplete="name"><div class="err" data-for="sn"></div>
+    <label for="se">Email</label><input id="se" type="email" autocomplete="email"><div class="err" data-for="se"></div>
+    <label for="sph">Phone (WhatsApp)</label><input id="sph" type="tel" autocomplete="tel"><div class="err" data-for="sph"></div>
+    <label for="spw">Password</label><div class="pw"><input id="spw" type="password" autocomplete="new-password"><button type="button" data-show="spw">Show</button></div><div class="err" data-for="spw"></div>
+    <label for="scf">Confirm password</label><input id="scf" type="password" autocomplete="new-password"><div class="err" data-for="scf"></div>
+    <button class="go">Create account</button><div class="msg" id="sm" role="status"></div></form>
+  <form id="ff" novalidate hidden><h2>Reset your password</h2><p class="sub">Enter your email and we will send you a reset link.</p>
+    <label for="fe">Email</label><input id="fe" type="email"><div class="err" data-for="fe"></div>
+    <button class="go">Send reset link</button><div class="msg ok" id="fgm" role="status"></div><div style="margin-top:12px"><button type="button" class="link" id="fback">Back to log in</button></div></form>
+  <p class="note">Preview: accounts are kept only in this browser, and nothing is emailed. Real accounts, password reset and admin security need the backend.</p>
+</div></div>
+
+<div data-v="account" class="pg" hidden><div class="box"><h2 id="ah">Your account</h2><p class="sub" id="ai"></p>
+  <p>Your orders go through WhatsApp. Order history will show here once the backend is added.</p>
+  <p style="margin-top:20px"><a class="btn fill" href="#shop">Continue shopping</a> <button class="btn" id="out1">Log out</button></p></div></div>
+
+<div data-v="admin" class="pg" hidden>
+  <div class="top"><h2>Admin dashboard</h2><span><button class="btn fill" id="add">Add product</button> <button class="btn" id="out2">Log out</button></span></div>
+  <p class="sub">Changes here update the store right away in this preview. Customers order on WhatsApp, so there are no payments to manage.</p>
+  <div class="stats"><div class="stat"><b id="s1">0</b>Products</div><div class="stat"><b id="s2">0</b>Published</div><div class="stat"><b id="s3">0</b>Low stock (5 or fewer)</div></div>
+  <div class="msg ok" id="dm" role="status"></div>
+  <form id="pf" hidden novalidate><h3 id="pt">Add product</h3>
+    <div><label for="fn">Product name</label><input id="fn"></div>
+    <div><label for="fc">Category</label><input id="fc" list="cl"><datalist id="cl"><option>T-shirts</option><option>Hoodies</option><option>Trousers</option><option>Women</option></datalist></div>
+    <div><label for="fp">Price (₦)</label><input id="fp" type="number" min="0"></div>
+    <div><label for="fo">Old price (₦, optional)</label><input id="fo" type="number" min="0"></div>
+    <div><label for="fcol">Colours (comma separated)</label><input id="fcol"></div>
+    <div><label for="fst">Stock quantity</label><input id="fst" type="number" min="0"></div>
+    <div><label for="fm">Material</label><input id="fm"></div><div><label for="fs">Style</label><input id="fs"></div>
+    <div class="full"><label for="fd">Description</label><textarea id="fd" rows="3"></textarea></div>
+    <div class="full"><label for="fi">Product image (PNG, JPG or WebP, under 3 MB)</label><input id="fi" type="file" accept="image/png,image/jpeg,image/webp"></div>
+    <div class="full"><label><input id="fpub" type="checkbox" checked style="width:auto"> Published (visible on the store)</label></div>
+    <div class="acts"><button class="go" style="margin:0;width:auto;padding:11px 24px">Save product</button><button type="button" class="btn" id="cx">Cancel</button></div></form>
+  <div class="wrap"><table><thead><tr><th>Image</th><th>Product</th><th>Price</th><th>Stock</th><th>Status</th><th></th></tr></thead><tbody id="rows"></tbody></table></div>
+  <h2 style="margin-top:40px">Contact information</h2><p class="sub">Shown in the top bar and the footer. Add, change or remove anything.</p>
+  <form id="cf" novalidate style="background:var(--surface);border:1px solid var(--line);padding:20px;max-width:820px"><label for="cw" style="margin-top:0">WhatsApp number (customer orders go here)</label><input id="cw" inputmode="tel"><div class="err" data-for="cw"></div><div id="cr"></div><div class="acts" style="margin-top:16px"><button type="button" class="btn" id="cadd">Add information</button><button class="go" style="margin:0;width:auto;padding:11px 24px">Save contact info</button></div><div class="msg ok" id="cm" role="status"></div></form>
+</div>
+</main>
+
+<footer id="contact"><div class="brand">EM<b>BASH</b> <i>STORE</i></div><p>Ready to serve you well</p><div id="finfo" style="margin-top:8px"></div></footer>
+
+<aside id="drawer" aria-label="Shopping cart">
+  <div class="row" style="border:0;padding:0"><h2 style="margin:0">Your cart</h2><button class="chip" id="close">Close</button></div>
+  <div id="items"></div>
+  <div class="tot"><span>Delivery</span><span>Agreed on WhatsApp</span></div>
+  <div class="tot big"><span>Total</span><span id="total">₦0</span></div>
+  <a class="btn fill" id="wa" role="button" target="_blank" rel="noopener">Order on WhatsApp</a>
+  <p class="spec" style="margin-top:10px">You review the message on WhatsApp and send it yourself. No payment is taken on this website.</p>
+</aside>
+
+<script>
+let WA="2349161036886";const LINK="https://claude.ai/artifact/M8NWJDfht8AP3KQV2M6rzF",ADMIN_EH="514f675f460028264432a54ae9b8c5e47fe50890a1a1d20bdd2031c643677ddf",ADMIN_HASH="b65f9a0ef01bad2c0dd7c3b99d36b1f01f1205bc8831eb09b68ce60c933016d1";
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],money=n=>"₦"+Number(n).toLocaleString("en-NG");
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const emailOk=v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+const LOGO='<svg viewBox="0 0 100 112" role="img" aria-label="EMBASH logo"><path d="M50 3 96 29v54L50 109 4 83V29Z" fill="#c9a24b" stroke="#e6c778" stroke-width="3"/><text x="50" y="76" text-anchor="middle" font-family="Georgia,serif" font-weight="900" font-size="66" fill="#0a0a0a" font-style="italic">E</text></svg>';
+$$("[data-logo]").forEach(e=>e.innerHTML=LOGO);
+const IC={"T-shirts":"M20 8 8 14l4 12 6-2v34h28V24l6 2 4-12-12-6c-2 6-6 8-12 8s-10-2-12-8Z",Hoodies:"M22 6 8 14l4 12 6-2v36h28V24l6 2 4-12L42 6c0 8-4 12-10 12S22 14 22 6Z",Trousers:"M16 6h32l4 52H36L32 26l-4 32H12Z",Women:"M24 4h16l2 18 10 38H12l10-38Z"};
+// products: id,name,category,price,oldPrice,colours,material,style,description,stock,tag,bg
+let P=[
+[1,"Gold Crest Tee","T-shirts",12000,15000,"Black, White","100% combed cotton","Casual, crew neck","Soft tee with a gold crest print on the chest. Relaxed everyday fit.",24,"Best seller","#1c1c1c"],
+[2,"Classic White Tee","T-shirts",10000,0,"White","100% cotton","Casual, crew neck","Clean heavyweight white tee that goes under anything.",30,"New","#e9e4d6"],
+[3,"Noir Hoodie","Hoodies",28000,0,"Black, Charcoal","Cotton-polyester fleece","Relaxed fit, hooded","Heavy fleece hoodie with a kangaroo pocket and ribbed cuffs.",12,"New","#161616"],
+[4,"Ivory Hoodie","Hoodies",28000,32000,"Ivory","Cotton-polyester fleece","Relaxed fit, hooded","Soft ivory hoodie with a roomy hood and ribbed cuffs.",4,"","#d8d0bb"],
+[5,"Tailored Trousers","Trousers",24000,0,"Black, Navy","Stretch wool blend","Slim, tailored","Slim trousers with a clean drape for work or events.",15,"Best seller","#202020"],
+[6,"Stone Chinos","Trousers",22000,0,"Stone","Cotton twill","Straight leg","Everyday chinos in a soft stone shade.",18,"","#bfb59a"],
+[7,"Gold Trim Blouse","Women",20000,0,"Black, Champagne","Satin-finish polyester","Relaxed, smart casual","Relaxed blouse with gold-toned trim at the collar.",9,"New","#2a2418"],
+[8,"Evening Wrap Dress","Women",35000,42000,"Black","Crepe","Midi, wrap","Wrap-style midi dress with a flattering tie waist.",3,"","#111"]
+].map(a=>({id:a[0],n:a[1],c:a[2],p:a[3],o:a[4],cols:a[5].split(",").map(s=>s.trim()),m:a[6],s:a[7],d:a[8],st:a[9],t:a[10],bg:a[11],pub:true,img:""}));
+let nid=9,cat="All",term="",cart=[],sel={},S=null,ed=null,img="",arm=null;
+const light=c=>["#e9e4d6","#d8d0bb","#bfb59a"].includes(c);
+
+// ---------- storage (kept only in this browser) ----------
+function users(){try{return JSON.parse(localStorage.getItem("emb_users")||"{}")}catch(e){return window._u||{}}}
+function saveUsers(u){window._u=u;try{localStorage.setItem("emb_users",JSON.stringify(u))}catch(e){}}
+try{S=JSON.parse(sessionStorage.getItem("emb_s")||"null")}catch(e){}
+function setS(s){S=s;try{s?sessionStorage.setItem("emb_s",JSON.stringify(s)):sessionStorage.removeItem("emb_s")}catch(e){}header()}
+async function H(s){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
+function header(){const a=$("#auth");a.textContent=!S?"Log in":S.role==="admin"?"Dashboard":"My account";a.href=!S?"#login":S.role==="admin"?"#admin":"#account"}
+
+// ---------- routing ----------
+function route(){
+  let h=(location.hash||"#store").slice(1),v=h;
+  if(["shop","about","contact"].includes(h)||/^p\d+$/.test(h))v="store";
+  if(!["store","login","account","admin"].includes(v))v="store";
+  if(v==="admin"&&!(S&&S.role==="admin"))v="login";
+  if(v==="account"&&!S)v="login";
+  if(v==="login"&&S)v=S.role==="admin"?"admin":"account";
+  $$("[data-v]").forEach(e=>e.hidden=e.dataset.v!==v);
+  if(v==="account"){$("#ah").textContent="Hello, "+S.name;$("#ai").textContent=S.email}
+  if(v==="admin")rows();
+  const t=["shop","about","contact"].includes(h)||/^p\d+$/.test(h)?document.getElementById(h):null;
+  t?t.scrollIntoView():scrollTo(0,0);
+}
+addEventListener("hashchange",route);
+
+// ---------- store ----------
+function chips(){const cs=["All",...new Set(P.filter(x=>x.pub).map(x=>x.c))];if(!cs.includes(cat))cat="All";$("#chips").innerHTML=cs.map(c=>`<button class="chip" aria-pressed="${c===cat}" data-c="${esc(c)}">${esc(c)}</button>`).join("")}
+function grid(){
+  const T=term.split(/\s+/).filter(Boolean).map(w=>w.length>3&&w.endsWith("s")?w.slice(0,-1):w),hay=x=>[x.n,x.c,x.cols.join(" "),x.m,x.s,x.d,x.t].join(" ").toLowerCase();
+  let l=P.filter(x=>x.pub&&(cat==="All"||x.c===cat)),note="";
+  if(T.length){const all=l.filter(x=>T.every(w=>hay(x).includes(w)));
+    if(all.length){l=all;note=`${l.length} result${l.length>1?"s":""} for “${term}”`}
+    else{l=l.filter(x=>T.some(w=>hay(x).includes(w)));note=l.length?`No exact match for “${term}”. Showing close matches.`:""}}
+  $("#sr").textContent=note;$("#none").hidden=l.length>0;
+  $("#grid").innerHTML=l.map(x=>`<article class="card" id="p${x.id}"><div class="pic" style="background:${esc(x.bg)};color:${light(x.bg)?"#0a0a0a":"#c9a24b"}">${x.t?`<span class="tag">${esc(x.t)}</span>`:""}${x.img?`<img src="${x.img}" alt="${esc(x.n)}">`:`<svg viewBox="0 0 64 64" aria-hidden="true"><path d="${IC[x.c]||IC["T-shirts"]}"/></svg>`}</div>
+  <div class="info"><h3>${esc(x.n)}</h3><div class="price">${money(x.p)}${x.o?`<s>${money(x.o)}</s>`:""}</div><p style="font-size:14px">${esc(x.d)}</p>
+  <p class="spec">Material: ${esc(x.m)}<br>Style: ${esc(x.s)}</p>
+  ${x.cols.length>1?`<label class="spec" style="margin:0">Colour <select data-col="${x.id}">${x.cols.map(c=>`<option${(sel[x.id]||x.cols[0])===c?" selected":""}>${esc(c)}</option>`).join("")}</select></label>`:`<p class="spec">Colour: ${esc(x.cols[0]||"—")}</p>`}
+  <p class="spec">${x.st>0?(x.st<=5?"Only "+x.st+" left":"In stock"):"Out of stock"}</p>
+  <button class="add" data-add="${x.id}"${x.st>0?"":" disabled"}>${x.st>0?"Add to cart":"Out of stock"}</button></div></article>`).join("");
+}
+function drawCart(){
+  $("#count").textContent=cart.reduce((a,b)=>a+b.q,0);
+  $("#items").innerHTML=cart.length?cart.map((l,i)=>`<div class="row"><div>${esc(l.n)}<small>Colour: ${esc(l.col)} · ${money(l.p)} each</small></div><div class="qty"><button data-q="${i}" data-d="-1" aria-label="Decrease">−</button> ${l.q} <button data-q="${i}" data-d="1" aria-label="Increase">+</button></div></div>`).join(""):`<p class="empty">Your cart is empty. Add something you like.</p>`;
+  const t=cart.reduce((a,b)=>a+b.p*b.q,0);$("#total").textContent=money(t);
+  const m="Hello EMBASH STORE, I would like to order:\n\n"+cart.map(l=>`Product: ${l.n}\nPrice: ${money(l.p)}\nColour: ${l.col}\nQuantity: ${l.q}\nLink: ${LINK}#p${l.id}\n`).join("\n")+`\nTotal: ${money(t)}\nPlease confirm availability and delivery.`;
+  $("#wa").href=cart.length?`https://wa.me/${WA}?text=${encodeURIComponent(m)}`:"#";
+}
+function refresh(){cart=cart.filter(l=>{const x=P.find(p=>p.id===l.id&&p.pub);if(!x||x.st<1)return false;l.p=x.p;l.q=Math.min(l.q,x.st);return true});chips();grid();rows();drawCart()}
+
+// ---------- admin dashboard ----------
+function rows(){
+  $("#rows").innerHTML=P.map(x=>`<tr><td>${x.img?`<img class="th" src="${x.img}" alt="">`:`<span class="th"></span>`}</td><td>${esc(x.n)}<br><small>${esc(x.c)} · ${esc(x.cols.join(", "))}</small></td><td>${money(x.p)}${x.o?`<br><small><s>${money(x.o)}</s></small>`:""}</td><td class="${x.st<=5?"low":""}">${x.st}</td><td>${x.pub?"Published":"Hidden"}</td>
+  <td><button class="btn o" data-e="${x.id}">Edit</button> <button class="btn o" data-t="${x.id}">${x.pub?"Hide":"Publish"}</button> <button class="btn o w" data-x="${x.id}">${arm===x.id?"Confirm delete":"Delete"}</button></td></tr>`).join("")||`<tr><td colspan="6" class="empty">No products yet.</td></tr>`;
+  $("#s1").textContent=P.length;$("#s2").textContent=P.filter(x=>x.pub).length;$("#s3").textContent=P.filter(x=>x.st<=5).length;
+}
+function openForm(x){ed=x?x.id:null;img=x?x.img:"";$("#pt").textContent=x?"Edit product":"Add product";
+  const v={fn:x&&x.n,fc:x&&x.c,fp:x&&x.p,fo:x&&x.o||"",fcol:x&&x.cols.join(", "),fst:x&&x.st,fm:x&&x.m,fs:x&&x.s,fd:x&&x.d};
+  for(const k in v)$("#"+k).value=v[k]||(v[k]===0?0:"");$("#fpub").checked=x?x.pub:true;$("#fi").value="";$("#pf").hidden=false;$("#fn").focus()}
+$("#add").onclick=()=>openForm();$("#cx").onclick=()=>$("#pf").hidden=true;
+$("#fi").onchange=e=>{const f=e.target.files[0];if(!f)return;
+  if(!/^image\/(png|jpeg|webp)$/.test(f.type)||f.size>3e6){$("#dm").className="msg";$("#dm").textContent="Choose a PNG, JPG or WebP image under 3 MB.";e.target.value="";return}
+  const r=new FileReader();r.onload=()=>{img=r.result;$("#dm").className="msg ok";$("#dm").textContent="Image ready. Save the product to attach it."};r.readAsDataURL(f)};
+$("#pf").onsubmit=e=>{e.preventDefault();const n=$("#fn").value.trim(),p=+$("#fp").value,m=$("#dm");
+  if(!n||!(p>0)){m.className="msg";m.textContent="Enter a product name and a price above 0.";return}
+  const old=P.find(o=>o.id===ed)||{},x={id:ed||nid++,n,c:$("#fc").value.trim()||"Other",p,o:+$("#fo").value||0,cols:$("#fcol").value.split(",").map(s=>s.trim()).filter(Boolean),m:$("#fm").value.trim(),s:$("#fs").value.trim(),d:$("#fd").value.trim(),st:Math.max(0,+$("#fst").value||0),pub:$("#fpub").checked,img,t:old.t||"",bg:old.bg||"#1c1c1c"};
+  if(!x.cols.length)x.cols=["—"];ed?P=P.map(o=>o.id===ed?x:o):P.push(x);
+  $("#pf").hidden=true;m.className="msg ok";m.textContent="Saved. The store is updated (preview only, not stored).";refresh()};
+
+// ---------- clicks ----------
+document.addEventListener("click",e=>{const t=e.target,d=t.dataset;
+  if(d.c){cat=d.c;chips();grid()}
+  else if(d.add){const x=P.find(p=>p.id==d.add),col=sel[x.id]||x.cols[0],l=cart.find(c=>c.id===x.id&&c.col===col);
+    if(l){if(l.q<x.st)l.q++}else cart.push({id:x.id,n:x.n,p:x.p,col,q:1});drawCart();$("#drawer").classList.add("open")}
+  else if(d.q){const l=cart[d.q],x=P.find(p=>p.id===l.id);l.q=Math.min(l.q+ +d.d,x?x.st:99);if(l.q<1)cart.splice(d.q,1);drawCart()}
+  else if(d.e)openForm(P.find(x=>x.id==d.e));
+  else if(d.t){const x=P.find(x=>x.id==d.t);x.pub=!x.pub;refresh()}
+  else if(d.x){if(arm==d.x){P=P.filter(x=>x.id!=d.x);arm=null;refresh()}else{arm=+d.x;rows()}}
+  else if(d.show){const i=$("#"+d.show),h=i.type==="password";i.type=h?"text":"password";t.textContent=h?"Hide":"Show"}
+  else if(t.id==="open")$("#drawer").classList.add("open");
+  else if(t.id==="close")$("#drawer").classList.remove("open");
+  else if(t.id==="out1"||t.id==="out2"){setS(null);location.hash="#store"}
+  else if(t.id==="t1"||t.id==="t2")tab(t.id==="t2");
+  else if(t.id==="fgo"){$("#lf").hidden=true;$("#ff").hidden=false}
+  else if(t.id==="fback")tab(false);
+  if(arm&&!d.x){arm=null;rows()}
+});
+document.addEventListener("change",e=>{if(e.target.dataset.col)sel[e.target.dataset.col]=e.target.value});
+$("#wa").addEventListener("click",e=>{if(!cart.length){e.preventDefault();alert("Add at least one item first.")}});
+$("#q").addEventListener("input",e=>{term=e.target.value.trim().toLowerCase();if(term){cat="All";chips()}grid();if(location.hash!=="#shop")location.hash="#shop"});
+
+// ---------- login / sign up ----------
+function tab(s){$("#t1").setAttribute("aria-selected",!s);$("#t2").setAttribute("aria-selected",s);$("#lf").hidden=s;$("#sf").hidden=!s;$("#ff").hidden=true}
+function bad(id,m){$("#"+id).setAttribute("aria-invalid",!!m);$(`[data-for=${id}]`).textContent=m||"";return!m}
+let fails=0,lock=0;
+$("#lf").onsubmit=async e=>{e.preventDefault();const m=$("#lm");m.className="msg";
+  const em=$("#le").value.trim().toLowerCase(),pw=$("#lp").value;
+  if(![bad("le",emailOk(em)?"":"Enter a valid email address."),bad("lp",pw?"":"Enter your password.")].every(Boolean))return;
+  if(Date.now()<lock){m.textContent=`Too many attempts. Try again in ${Math.ceil((lock-Date.now())/1000)} seconds.`;return}
+  if(await H("embash|"+em+"|"+pw)===ADMIN_HASH){fails=0;setS({email:em,name:"Admin",role:"admin"});location.hash="#admin";route();return}
+  const u=users()[em];
+  if(u&&u.h===await H("u|"+em+"|"+pw)){fails=0;setS({email:em,name:u.name,role:"customer"});location.hash="#account";route();return}
+  if(++fails>=5){lock=Date.now()+30000;fails=0}m.textContent="Wrong email or password."};
+$("#sf").onsubmit=async e=>{e.preventDefault();const m=$("#sm");m.className="msg";
+  const n=$("#sn").value.trim(),em=$("#se").value.trim().toLowerCase(),ph=$("#sph").value.trim(),pw=$("#spw").value;
+  const ok=[bad("sn",n.length>=2?"":"Enter your full name."),bad("se",emailOk(em)?"":"Enter a valid email address."),bad("sph",/^[0-9+\s-]{10,16}$/.test(ph)?"":"Enter a valid phone number."),
+   bad("spw",pw.length>=8&&/[A-Za-z]/.test(pw)&&/\d/.test(pw)?"":"Use at least 8 characters with a letter and a number."),bad("scf",$("#scf").value===pw&&pw?"":"Passwords do not match.")];
+  if(!ok.every(Boolean))return;
+  const us=users();if(us[em]||(await H("e|"+em)===ADMIN_EH)){bad("se","An account with this email already exists.");return}
+  us[em]={name:n,phone:ph,h:await H("u|"+em+"|"+pw)};saveUsers(us);setS({email:em,name:n,role:"customer"});location.hash="#account";route()};
+$("#ff").onsubmit=e=>{e.preventDefault();if(!bad("fe",emailOk($("#fe").value.trim())?"":"Enter a valid email address."))return;$("#fgm").textContent="Preview: if that email has an account, a reset link would be sent. Real reset needs the backend."};
+
+// ---------- contact info (admin editable) ----------
+let WD="0916 103 6886",CI=[{l:"Location",v:"Lagos, Nigeria",u:""}];
+const safeU=u=>/^(https?:\/\/|mailto:|tel:)/i.test(u||"")?u:"";
+function drawContact(){const a=$("#tw");a.href="https://wa.me/"+WA;a.textContent="WhatsApp: "+WD;
+  $("#finfo").innerHTML=`<p>WhatsApp: <a href="https://wa.me/${WA}" target="_blank" rel="noopener" style="color:var(--gold)">${esc(WD)}</a></p>`+CI.map(i=>{const u=safeU(i.u);return`<p>${i.l?esc(i.l)+": ":""}${u?`<a href="${esc(u)}" target="_blank" rel="noopener" style="color:var(--gold)">${esc(i.v||u)}</a>`:esc(i.v)}</p>`}).join("")}
+function crows(){$("#cr").innerHTML=CI.map((i,k)=>`<div class="cgrid"><input data-k="${k}" data-f="l" value="${esc(i.l)}" placeholder="Label (e.g. Email)" aria-label="Label"><input data-k="${k}" data-f="v" value="${esc(i.v)}" placeholder="Information" aria-label="Information"><input data-k="${k}" data-f="u" value="${esc(i.u)}" placeholder="Link (optional)" aria-label="Link"><button type="button" class="btn o w" data-rm="${k}">Remove</button></div>`).join("")}
+function csync(){$$("#cr [data-k]").forEach(e=>{CI[e.dataset.k][e.dataset.f]=e.value})}
+$("#cadd").onclick=()=>{csync();CI.push({l:"",v:"",u:""});crows()};
+$("#cr").addEventListener("click",e=>{if(e.target.dataset.rm!==undefined){csync();CI.splice(+e.target.dataset.rm,1);crows()}});
+$("#cf").onsubmit=e=>{e.preventDefault();csync();const m=$("#cm");m.className="msg";
+  let d=$("#cw").value.replace(/\D/g,"");if(d.startsWith("0"))d="234"+d.slice(1);
+  if(!bad("cw",d.length>=10&&d.length<=15?"":"Enter a valid WhatsApp number, for example 0801 234 5678."))return;
+  CI.forEach(i=>{i.l=i.l.trim();i.v=i.v.trim();i.u=i.u.trim()});CI=CI.filter(i=>i.l||i.v||i.u);
+  if(CI.some(i=>i.u&&!safeU(i.u))){m.textContent="Links must start with https://, mailto: or tel:";crows();return}
+  WA=d;WD=$("#cw").value.trim();drawContact();drawCart();crows();m.className="msg ok";m.textContent="Saved. The top bar, footer and WhatsApp orders now use this information (preview only, not stored)."};
+$("#cw").value=WD;crows();drawContact();
+header();refresh();route();
+</script>
+</body>
+</html>
